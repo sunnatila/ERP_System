@@ -1,0 +1,154 @@
+[
+  {"model": "products.category", "pk": 1, "fields": {"name": "Erkaklar"}},
+  {"model": "products.category", "pk": 2, "fields": {"name": "Ayollar"}},
+  {"model": "products.category", "pk": 3, "fields": {"name": "Bolalar"}},
+  {"model": "products.category", "pk": 4, "fields": {"name": "Sport"}},
+  {"model": "products.category", "pk": 5, "fields": {"name": "Unisex"}},
+
+  {"model": "products.product", "pk": 1, "fields": {
+    "name": "Erkaklar ko'ylagi", "category": 1, "price": "85000.00",
+    "stock": 150, "image": "👔", "description": "Klassik erkaklar ko'ylagi, yuqori sifatli mato",
+    "created_at": "2025-07-10T08:00:00Z", "updated_at": "2025-07-10T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 2, "fields": {
+    "name": "Erkaklar shimi", "category": 1, "price": "120000.00",
+    "stock": 80, "image": "👖", "description": "Klassik erkaklar shimi, qulay va chidamli",
+    "created_at": "2025-07-15T08:00:00Z", "updated_at": "2025-07-15T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 3, "fields": {
+    "name": "Ayollar ko'ylagi", "category": 2, "price": "95000.00",
+    "stock": 120, "image": "👗", "description": "Zamonaviy ayollar ko'ylagi, turli ranglarda mavjud",
+    "created_at": "2025-08-01T08:00:00Z", "updated_at": "2025-08-01T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 4, "fields": {
+    "name": "Ayollar palto", "category": 2, "price": "280000.00",
+    "stock": 45, "image": "🧥", "description": "Qishki ayollar palto, issiq va zamonaviy",
+    "created_at": "2025-08-10T08:00:00Z", "updated_at": "2025-08-10T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 5, "fields": {
+    "name": "Bola kostyumi", "category": 3, "price": "75000.00",
+    "stock": 60, "image": "🧒", "description": "Bolalar uchun qulay va bardoshli kostyum",
+    "created_at": "2025-08-15T08:00:00Z", "updated_at": "2025-08-15T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 6, "fields": {
+    "name": "Sport kostyumi", "category": 4, "price": "130000.00",
+    "stock": 90, "image": "🏃", "description": "Yuqori sifatli sport kostyumi, nafas oluvchi mato",
+    "created_at": "2025-09-01T08:00:00Z", "updated_at": "2025-09-01T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 7, "fields": {
+    "name": "Unisex futbolka", "category": 5, "price": "45000.00",
+    "stock": 200, "image": "👕", "description": "Qulaylik va uslubni birlashtirgan unisex futbolka",
+    "created_at": "2025-09-10T08:00:00Z", "updated_at": "2025-09-10T08:00:00Z"
+  }},
+  {"model": "products.product", "pk": 8, "fields": {
+    "name": "Jinsi shim", "category": 5, "price": "150000.00",
+    "stock": 110, "image": "🩱", "description": "Yuqori sifatli jinsi shim, barcha o'lchamlar mavjud",
+    "created_at": "2025-09-15T08:00:00Z", "updated_at": "2025-09-15T08:00:00Z"
+  }},
+
+  {"model": "customers.customer", "pk": 1, "fields": {
+    "name": "Ahmadjon Toshmatov", "phone": "+998901234567",
+    "email": "ahmadjon@example.com", "status": "active",
+    "created_at": "2025-07-05T08:00:00Z"
+  }},
+  {"model": "customers.customer", "pk": 2, "fields": {
+    "name": "Malika Yusupova", "phone": "+998901234568",
+    "email": "malika@example.com", "status": "active",
+    "created_at": "2025-07-10T08:00:00Z"
+  }},
+  {"model": "customers.customer", "pk": 3, "fields": {
+    "name": "Bobur Karimov", "phone": "+998901234569",
+    "email": "bobur@example.com", "status": "active",
+    "created_at": "2025-08-01T08:00:00Z"
+  }},
+  {"model": "customers.customer", "pk": 4, "fields": {
+    "name": "Shahlo Rahimova", "phone": "+998901234570",
+    "email": "shahlo@example.com", "status": "active",
+    "created_at": "2025-08-10T08:00:00Z"
+  }},
+  {"model": "customers.customer", "pk": 5, "fields": {
+    "name": "Jasur Mirzayev", "phone": "+998901234571",
+    "email": "jasur@example.com", "status": "inactive",
+    "created_at": "2025-09-01T08:00:00Z"
+  }},
+  {"model": "customers.customer", "pk": 6, "fields": {
+    "name": "Nilufar Hasanova", "phone": "+998901234572",
+    "email": "nilufar@example.com", "status": "active",
+    "created_at": "2025-09-15T08:00:00Z"
+  }},
+
+  {"model": "orders.order", "pk": 1, "fields": {
+    "customer": 1, "product": 7, "quantity": 50,
+    "total_price": "2250000.00", "status": "completed",
+    "created_at": "2025-08-15T10:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 2, "fields": {
+    "customer": 2, "product": 3, "quantity": 15,
+    "total_price": "1425000.00", "status": "completed",
+    "created_at": "2025-09-10T11:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 3, "fields": {
+    "customer": 3, "product": 7, "quantity": 30,
+    "total_price": "1350000.00", "status": "completed",
+    "created_at": "2025-10-05T09:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 4, "fields": {
+    "customer": 4, "product": 4, "quantity": 10,
+    "total_price": "2800000.00", "status": "completed",
+    "created_at": "2025-10-20T14:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 5, "fields": {
+    "customer": 1, "product": 1, "quantity": 40,
+    "total_price": "3400000.00", "status": "completed",
+    "created_at": "2025-11-10T10:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 6, "fields": {
+    "customer": 6, "product": 7, "quantity": 60,
+    "total_price": "2700000.00", "status": "completed",
+    "created_at": "2025-12-05T09:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 7, "fields": {
+    "customer": 3, "product": 6, "quantity": 20,
+    "total_price": "2600000.00", "status": "completed",
+    "created_at": "2026-01-08T11:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 8, "fields": {
+    "customer": 2, "product": 1, "quantity": 25,
+    "total_price": "2125000.00", "status": "completed",
+    "created_at": "2026-01-20T13:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 9, "fields": {
+    "customer": 5, "product": 3, "quantity": 20,
+    "total_price": "1900000.00", "status": "processing",
+    "created_at": "2026-02-12T10:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 10, "fields": {
+    "customer": 4, "product": 6, "quantity": 15,
+    "total_price": "1950000.00", "status": "completed",
+    "created_at": "2026-03-08T09:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 11, "fields": {
+    "customer": 1, "product": 8, "quantity": 20,
+    "total_price": "3000000.00", "status": "processing",
+    "created_at": "2026-04-15T14:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 12, "fields": {
+    "customer": 6, "product": 2, "quantity": 25,
+    "total_price": "3000000.00", "status": "pending",
+    "created_at": "2026-05-10T11:00:00Z"
+  }},
+  {"model": "orders.order", "pk": 13, "fields": {
+    "customer": 3, "product": 5, "quantity": 35,
+    "total_price": "2625000.00", "status": "pending",
+    "created_at": "2026-06-01T09:00:00Z"
+  }},
+
+  {"model": "warehouse.warehouseitem", "pk": 1, "fields": {"product": 1, "quantity": 150, "location": "A-1", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 2, "fields": {"product": 2, "quantity": 80, "location": "A-2", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 3, "fields": {"product": 3, "quantity": 120, "location": "A-3", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 4, "fields": {"product": 4, "quantity": 45, "location": "B-1", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 5, "fields": {"product": 5, "quantity": 60, "location": "B-2", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 6, "fields": {"product": 6, "quantity": 90, "location": "B-3", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 7, "fields": {"product": 7, "quantity": 200, "location": "C-1", "last_updated": "2025-09-01T08:00:00Z"}},
+  {"model": "warehouse.warehouseitem", "pk": 8, "fields": {"product": 8, "quantity": 110, "location": "C-2", "last_updated": "2025-09-01T08:00:00Z"}}
+]
