@@ -117,6 +117,11 @@ CORS_ALLOWED_ORIGINS = config(
 
 CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
 
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost'
+).split(',')
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
