@@ -55,7 +55,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="page-header">
-        <h1 className="page-title">Dashboard</h1>
+        <h1 className="page-title">Bosh panel</h1>
         <span className="text-sm text-gray-400">Umumiy ko'rinish</span>
       </div>
 
