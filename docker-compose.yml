@@ -24,6 +24,8 @@ services:
     container_name: stylehub-backend
     restart: unless-stopped
     env_file: .env
+    ports:
+      - "8001:8000"
     depends_on:
       db:
         condition: service_healthy
