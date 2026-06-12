@@ -27,7 +27,8 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
 
             echo "==> GitHub dan oxirgi o'zgarishlarni olish"
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
             echo "==> Docker containerlarni yangilash"
             docker compose down
