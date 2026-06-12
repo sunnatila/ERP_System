@@ -37,6 +37,9 @@ jobs:
             echo "==> Migratsiyalarni bajarish"
             docker compose exec -T backend python manage.py migrate
 
+            echo "==> Seed (admin + boshlangich ma'lumotlar)"
+            docker compose exec -T backend python manage.py seed
+
             echo "==> Static fayllarni yig'ish"
             docker compose exec -T backend python manage.py collectstatic --noinput
 
