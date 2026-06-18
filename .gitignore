@@ -3,3 +3,4 @@ _bmad
 .env
 .env.example
 .idea
+.venv
