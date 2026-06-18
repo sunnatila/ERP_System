@@ -24,7 +24,7 @@ export default function Sidebar() {
     <aside className="fixed left-0 top-0 h-screen w-64 bg-dark-800 border-r border-dark-600 flex flex-col z-40">
       {/* Logo */}
       <div className="p-6 border-b border-dark-600">
-        <h1 className="text-xl font-display font-bold text-gradient">StyleHub</h1>
+        <h1 className="text-xl font-display font-bold text-gradient">Remodule</h1>
         <p className="text-xs text-gray-500 mt-0.5">Ulgurji boshqaruv tizimi</p>
       </div>
 
