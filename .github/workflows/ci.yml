@@ -1,0 +1,129 @@
+name: CI — Test & Build
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ─────────────────────────────────────────
+  # 1. Backend testlar
+  # ─────────────────────────────────────────
+  test-backend:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Python 3.11 o'rnatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Dependencylarni o'rnatish
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: Migratsiya fayllari yaratish va bajarish
+        env:
+          SECRET_KEY: ci-test-secret-key-not-for-production
+          DEBUG: 'True'
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          DB_HOST: localhost
+          DB_PORT: '5432'
+          ALLOWED_HOSTS: 'localhost,127.0.0.1'
+        run: |
+          cd backend
+          python manage.py makemigrations accounts products orders customers warehouse
+          python manage.py migrate
+
+      - name: Django testlarni ishga tushirish
+        env:
+          SECRET_KEY: ci-test-secret-key-not-for-production
+          DEBUG: 'True'
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          DB_HOST: localhost
+          DB_PORT: '5432'
+          ALLOWED_HOSTS: 'localhost,127.0.0.1'
+        run: |
+          cd backend
+          python manage.py test --verbosity=2
+
+  # ─────────────────────────────────────────
+  # 2. Frontend build tekshirish
+  # ─────────────────────────────────────────
+  build-frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Node.js 20 o'rnatish
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: NPM paketlarini o'rnatish
+        run: |
+          cd frontend
+          npm install
+
+      - name: Frontend build qilish
+        run: |
+          cd frontend
+          npm run build
+
+  # ─────────────────────────────────────────
+  # 3. Docker image build tekshirish
+  # ─────────────────────────────────────────
+  build-docker:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    needs: [test-backend, build-frontend]
+
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: .env test fayli yaratish
+        run: |
+          cat > .env << EOF
+          SECRET_KEY=ci-test-secret-key-not-for-production
+          DEBUG=False
+          POSTGRES_DB=stylehub_db
+          POSTGRES_USER=stylehub_user
+          POSTGRES_PASSWORD=stylehub_pass
+          DB_HOST=db
+          DB_PORT=5432
+          ALLOWED_HOSTS=localhost,127.0.0.1
+          EOF
+
+      - name: Docker Compose build
+        run: docker compose build --no-cache

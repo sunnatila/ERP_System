@@ -1,0 +1,53 @@
+name: CD — Deploy to Production
+
+on:
+  push:
+    branches: [main]       # faqat main ga merge bo'lganda ishga tushadi
+
+jobs:
+  deploy:
+    name: Deploy to Airnet Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni yuklab olish
+        uses: actions/checkout@v4
+
+      - name: Serverga SSH orqali deploy qilish
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            set -e
+
+            echo "==> Loyiha papkasiga o'tish"
+            cd ${{ secrets.PROJECT_PATH }}
+
+            echo "==> GitHub dan oxirgi o'zgarishlarni olish"
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Docker containerlarni yangilash"
+            docker compose down
+            docker compose up -d --build
+
+            echo "==> Migratsiyalarni bajarish"
+            docker compose exec -T backend python manage.py migrate
+
+            echo "==> Seed (admin + boshlangich ma'lumotlar)"
+            docker compose exec -T backend python manage.py seed
+
+            echo "==> Static fayllarni yig'ish"
+            docker compose exec -T backend python manage.py collectstatic --noinput
+
+            echo "==> Containerlar holati"
+            docker compose ps
+
+            echo "✓ Deploy muvaffaqiyatli yakunlandi!"
+
+      - name: Deploy natijasini bildirish
+        if: failure()
+        run: echo "Deploy XATO! Loglarni tekshiring."
